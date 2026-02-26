@@ -77,3 +77,33 @@ If you'd like, I can:
 - Or, push the current local repo for you (I can show the exact git commands again and guide you through any errors).
 
 Tell me whether you want me to try creating a PR (I will provide the commands you'll need to run locally), or if you want to handle the push and I'll continue with post-deploy steps (like updating `NEXT_PUBLIC_BASE_URL` to the real Vercel URL and enabling redirects/preview settings).
+
+## Email (Contact form) configuration
+
+The contact form uses Nodemailer in `src/app/api/contact/route.ts`. To send email from production you must set provider credentials as environment variables in Vercel (Project → Settings → Environment Variables). The API supports two modes:
+
+- SMTP host mode (recommended for most providers): set `EMAIL_HOST`, `EMAIL_PORT`, `EMAIL_SECURE` (true/false), `EMAIL_USER`, `EMAIL_PASS`.
+- Service mode (convenience): set `EMAIL_SERVICE` (e.g. `gmail`), and `EMAIL_USER`, `EMAIL_PASS`.
+
+Required minimum environment variables:
+
+- `EMAIL_USER` – the SMTP username or from-address (e.g. your email)
+- `EMAIL_PASS` – the SMTP password or app password
+
+Optional and recommended:
+
+- `EMAIL_HOST` – SMTP host (e.g. `smtp.gmail.com` or your provider)
+- `EMAIL_PORT` – SMTP port (587 or 465)
+- `EMAIL_SECURE` – `true` if using TLS port 465, otherwise `false`
+- `EMAIL_FROM` – optional From address (defaults to `EMAIL_USER`)
+- `EMAIL_TO` – optional recipient (defaults to `EMAIL_USER`)
+
+Notes for Gmail users
+- Gmail no longer accepts regular account passwords for SMTP. Create an App Password and use it as `EMAIL_PASS`, or use OAuth2. See https://support.google.com/accounts/answer/185833 for App Passwords (you need 2-Step Verification enabled on the account).
+
+Setting env vars in Vercel
+1. Open your project on Vercel.
+2. Settings → Environment Variables → Add each variable (set for Production and Preview).
+3. Redeploy the project after adding variables.
+
+If you prefer a transactional email provider (SendGrid, Mailgun, Postmark), use their SMTP credentials or provider-specific integration. These are more reliable and scalable than direct Gmail SMTP.
