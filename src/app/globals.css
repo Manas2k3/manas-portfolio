@@ -1,26 +1,241 @@
 @import "tailwindcss";
 
+/* ──────────────────────────────────────────
+   Design Tokens — Refined Premium Palette
+   Apple × Stripe × Linear × Notion
+   ────────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Core palette */
+  --color-navy: #2F4156;
+  --color-navy-dark: #243344;
+  --color-navy-light: #3d5570;
+  --color-teal: #567C8D;
+  --color-teal-light: #6a9aad;
+  --color-teal-muted: rgba(86, 124, 141, 0.4);
+  --color-sky: #C8D9E6;
+  --color-sky-light: #dce8f0;
+  --color-beige: #F5EFEB;
+  --color-white: #FFFFFF;
+
+  /* Text */
+  --color-text-heading: #2F4156;
+  --color-text-body: #4a5e6f;
+  --color-text-muted: #7a8e9e;
+  --color-text-light: #FFFFFF;
+
+  /* Surfaces */
+  --color-bg-white: #FFFFFF;
+  --color-bg-beige: #F5EFEB;
+  --color-bg-sky: #C8D9E6;
+  --color-bg-navy: #2F4156;
+
+  /* Borders */
+  --color-border: rgba(47, 65, 86, 0.08);
+  --color-border-medium: rgba(47, 65, 86, 0.12);
+  --color-border-teal: rgba(86, 124, 141, 0.2);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(47, 65, 86, 0.06);
+  --shadow-card: 0 2px 12px rgba(47, 65, 86, 0.06);
+  --shadow-card-hover: 0 8px 30px rgba(47, 65, 86, 0.12);
+  --shadow-nav: 0 1px 8px rgba(47, 65, 86, 0.08);
+
+  /* Spacing (8px grid) */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-5: 2.5rem;
+  --space-6: 3rem;
+  --space-8: 4rem;
+  --space-10: 5rem;
+  --space-12: 6rem;
+  --space-16: 8rem;
+  --space-20: 10rem;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --duration-fast: 0.3s;
+  --duration-normal: 0.5s;
+  --duration-slow: 0.6s;
 }
 
+/* ──────────────────────────────────────────
+   Tailwind v4 Theme Extension
+   ────────────────────────────────────────── */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-navy: var(--color-navy);
+  --color-navy-dark: var(--color-navy-dark);
+  --color-teal: var(--color-teal);
+  --color-teal-light: var(--color-teal-light);
+  --color-sky: var(--color-sky);
+  --color-beige: var(--color-beige);
+  --color-text-heading: var(--color-text-heading);
+  --color-text-body: var(--color-text-body);
+  --color-text-muted: var(--color-text-muted);
+  --font-heading: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ──────────────────────────────────────────
+   Base Styles
+   ────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-bg-white);
+  color: var(--color-text-body);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Skip to content (accessibility) */
+.skip-to-content {
+  position: absolute;
+  top: -100%;
+  left: var(--space-2);
+  z-index: 1000;
+  padding: var(--space-1) var(--space-2);
+  background: var(--color-teal);
+  color: var(--color-white);
+  font-weight: 600;
+  border-radius: 0 0 8px 8px;
+  transition: top 0.2s var(--ease-out);
+}
+
+.skip-to-content:focus {
+  top: 0;
+}
+
+/* Selection */
+::selection {
+  background: var(--color-sky);
+  color: var(--color-navy);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-beige);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-teal-muted);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-teal);
+}
+
+/* ──────────────────────────────────────────
+   Typography
+   ────────────────────────────────────────── */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  color: var(--color-text-heading);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+/* ──────────────────────────────────────────
+   Accent text
+   ────────────────────────────────────────── */
+.accent-text {
+  color: var(--color-teal);
+}
+
+/* ──────────────────────────────────────────
+   Section container
+   ────────────────────────────────────────── */
+.section-container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: var(--space-16) var(--space-3);
+}
+
+@media (min-width: 768px) {
+  .section-container {
+    padding: var(--space-20) var(--space-6);
+  }
+}
+
+/* ──────────────────────────────────────────
+   Section backgrounds (alternating rhythm)
+   ────────────────────────────────────────── */
+.bg-section-white {
+  background: var(--color-bg-white);
+}
+
+.bg-section-beige {
+  background: var(--color-bg-beige);
+}
+
+.bg-section-sky {
+  background: var(--color-bg-sky);
+}
+
+/* ──────────────────────────────────────────
+   Reduced Motion Support
+   ────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ──────────────────────────────────────────
+   Focus Styles (Keyboard Navigation)
+   ────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-teal);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ──────────────────────────────────────────
+   Accent underline bar
+   ────────────────────────────────────────── */
+.accent-bar {
+  display: block;
+  height: 3px;
+  width: 48px;
+  margin-top: 12px;
+  background: var(--color-teal);
+  border-radius: 2px;
+}
+
+.accent-bar-center {
+  margin-left: auto;
+  margin-right: auto;
 }
