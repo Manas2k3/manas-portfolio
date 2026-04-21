@@ -65,7 +65,7 @@ export default function Navbar() {
                         textDecoration: "none",
                     }}
                 >
-                    Manas Sethi
+                    Manas Ranjan Sethi
                 </a>
 
                 {/* Desktop links */}

@@ -302,7 +302,7 @@ export default function Contact() {
                                 {[
                                     { icon: <FiGithub size={16} />, label: "GitHub", href: "https://github.com/Manas2k3" },
                                     { icon: <FiLinkedin size={16} />, label: "LinkedIn", href: "https://www.linkedin.com/in/manas-ranjan-sethi-flutter-dev/" },
-                                    { icon: <FiFile size={16} />, label: "Download Resume (PDF)", href: "/resume.pdf" },
+                                    { icon: <FiFile size={16} />, label: "Download Resume (PDF)", href: "/resume-latest.pdf" },
                                     { icon: <FiPhone size={16} />, label: "+91 8456958268", href: null },
                                 ].map((item) => (
                                     <div key={item.label} style={{ display: "flex", alignItems: "center", gap: 12 }}>
